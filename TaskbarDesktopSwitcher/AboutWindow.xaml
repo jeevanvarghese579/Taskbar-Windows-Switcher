@@ -48,11 +48,11 @@
 
         <!-- Version -->
         <TextBlock Grid.Row="2"
-                   Text="Version 1.0.4"
-                   FontSize="14"
-                   Foreground="#666666"
-                   HorizontalAlignment="Center"
-                   Margin="0,8,0,20"/>
+                    Text="Version 110"
+                    FontSize="14"
+                    Foreground="#666666"
+                    HorizontalAlignment="Center"
+                    Margin="0,8,0,20"/>
 
         <!-- Description -->
         <TextBlock Grid.Row="3"

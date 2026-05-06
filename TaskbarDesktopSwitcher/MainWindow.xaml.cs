@@ -7,6 +7,9 @@ namespace TaskbarDesktopSwitcher
     {
         public StartupManager? StartupManager { get; set; }
         public bool IsExiting { get; set; } = false;
+        public bool IsSwitcherEnabled { get; set; } = true;
+        public MouseHook? MouseHook { get; set; }
+        public NotifyIconManager? NotifyIconManager { get; set; }
 
         public MainWindow()
         {
@@ -53,6 +56,10 @@ namespace TaskbarDesktopSwitcher
             {
                 StartWithWindowsToggle.IsChecked = StartupManager.IsStartWithWindowsEnabled();
             }
+            
+            // Initialize the enable switcher toggle
+            EnableSwitcherToggle.IsChecked = IsSwitcherEnabled;
+            UpdateStatus(IsSwitcherEnabled);
         }
 
         private void StartWithWindowsToggle_Checked(object sender, RoutedEventArgs e)
@@ -63,6 +70,22 @@ namespace TaskbarDesktopSwitcher
         private void StartWithWindowsToggle_Unchecked(object sender, RoutedEventArgs e)
         {
             StartupManager?.DisableStartWithWindows();
+        }
+
+        private void EnableSwitcherToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            IsSwitcherEnabled = true;
+            MouseHook?.Start();
+            UpdateStatus(true);
+            NotifyIconManager?.UpdateEnableSwitcherState(true);
+        }
+
+        private void EnableSwitcherToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            IsSwitcherEnabled = false;
+            MouseHook?.Stop();
+            UpdateStatus(false);
+            NotifyIconManager?.UpdateEnableSwitcherState(false);
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)

@@ -20,17 +20,21 @@ namespace TaskbarDesktopSwitcher
             // Initialize startup manager
             _startupManager = new StartupManager();
 
-            // Create main window (but don't show it initially)
-            _mainWindow = new MainWindow();
-            _mainWindow.StartupManager = _startupManager;
-
-            // Initialize notify icon manager
-            _notifyIconManager = new NotifyIconManager(_mainWindow, _startupManager);
-
             // Initialize and start mouse hook
             _mouseHook = new MouseHook();
             _mouseHook.WheelScrolled += OnWheelScrolled;
             _mouseHook.Start();
+
+            // Create main window (but don't show it initially)
+            _mainWindow = new MainWindow();
+            _mainWindow.StartupManager = _startupManager;
+            _mainWindow.MouseHook = _mouseHook;
+
+            // Initialize notify icon manager
+            _notifyIconManager = new NotifyIconManager(_mainWindow, _startupManager);
+            
+            // Pass notify icon manager reference to main window
+            _mainWindow.NotifyIconManager = _notifyIconManager;
 
             // Show the main window
             _mainWindow.Show();

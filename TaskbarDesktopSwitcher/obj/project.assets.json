@@ -11,13 +11,13 @@
     "C:\\Users\\Jeevan\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.0.4",
+    "version": "110.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Veet projects\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
+      "projectUniqueName": "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
       "projectName": "TaskbarDesktopSwitcher",
-      "projectPath": "D:\\Veet projects\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
+      "projectPath": "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
       "packagesPath": "C:\\Users\\Jeevan\\.nuget\\packages\\",
-      "outputPath": "D:\\Veet projects\\MDS2\\TaskbarDesktopSwitcher\\obj\\",
+      "outputPath": "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jeevan\\AppData\\Roaming\\NuGet\\NuGet.Config"

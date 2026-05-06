@@ -16,6 +16,7 @@ namespace TaskbarDesktopSwitcher
         private readonly MainWindow _mainWindow;
         private readonly StartupManager _startupManager;
         private ToolStripMenuItem? _startWithWindowsMenuItem;
+        private ToolStripMenuItem? _enableSwitcherMenuItem;
 
         public NotifyIconManager(MainWindow mainWindow, StartupManager startupManager)
         {
@@ -57,6 +58,36 @@ namespace TaskbarDesktopSwitcher
             var openItem = new ToolStripMenuItem("Open");
             openItem.Click += (s, e) => ShowMainWindow();
             menu.Items.Add(openItem);
+
+            // Enable/Disable Desktop Switcher menu item
+            _enableSwitcherMenuItem = new ToolStripMenuItem("Enable Desktop Switcher");
+            _enableSwitcherMenuItem.Checked = _mainWindow.IsSwitcherEnabled;
+            _enableSwitcherMenuItem.Click += (s, e) =>
+            {
+                if (_enableSwitcherMenuItem != null && _mainWindow != null)
+                {
+                    // When Click fires, Checked has already been toggled by ToolStripMenuItem
+                    bool isEnabled = _enableSwitcherMenuItem.Checked;
+                    
+                    // Update main window toggle
+                    _mainWindow.EnableSwitcherToggle.IsChecked = isEnabled;
+                    
+                    // Directly control the MouseHook
+                    if (isEnabled)
+                    {
+                        _mainWindow.MouseHook?.Start();
+                        _mainWindow.UpdateStatus(true);
+                    }
+                    else
+                    {
+                        _mainWindow.MouseHook?.Stop();
+                        _mainWindow.UpdateStatus(false);
+                    }
+                    
+                    _mainWindow.IsSwitcherEnabled = isEnabled;
+                }
+            };
+            menu.Items.Add(_enableSwitcherMenuItem);
 
             // Start with Windows toggle menu item
             _startWithWindowsMenuItem = new ToolStripMenuItem("Start with Windows");
@@ -138,6 +169,17 @@ namespace TaskbarDesktopSwitcher
             if (_startWithWindowsMenuItem != null)
             {
                 _startWithWindowsMenuItem.Checked = _startupManager.IsStartWithWindowsEnabled();
+            }
+        }
+
+        /// <summary>
+        /// Updates the Enable Desktop Switcher check state in the context menu.
+        /// </summary>
+        public void UpdateEnableSwitcherState(bool isEnabled)
+        {
+            if (_enableSwitcherMenuItem != null)
+            {
+                _enableSwitcherMenuItem.Checked = isEnabled;
             }
         }
 

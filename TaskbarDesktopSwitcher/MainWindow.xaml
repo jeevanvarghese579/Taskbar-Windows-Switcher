@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:TaskbarDesktopSwitcher"
         mc:Ignorable="d"
         Title="Taskbar Desktop Switcher"
-        Height="450"
-        Width="400"
+        Height="650"
+        Width="550"
+        MinHeight="650"
+        MinWidth="550"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStyle="SingleBorderWindow"
         Loaded="Window_Loaded">
-    <Grid Margin="30">
+    <Grid Margin="60">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -21,24 +23,80 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- App Title -->
-        <StackPanel Grid.Row="0" Margin="0,0,0,30">
-            <TextBlock Text="Taskbar Desktop Switcher"
-                       FontSize="28"
-                       FontWeight="SemiBold"
-                       Foreground="#1A1A1A"/>
-            <TextBlock Text="Switch virtual desktops with mouse wheel over taskbar"
-                       FontSize="14"
-                       Foreground="#666666"
-                       Margin="0,5,0,0"/>
-        </StackPanel>
+        <!-- App Title and About Button -->
+        <Grid Grid.Row="0" Margin="0,0,0,40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0" VerticalAlignment="Top" Margin="0,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="Taskbar Desktop Switcher"
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           Foreground="#1A1A1A"
+                           TextWrapping="Wrap"/>
+                <TextBlock Grid.Row="1"
+                           Text="Switch virtual desktops with mouse wheel over taskbar"
+                           FontSize="14"
+                           Foreground="#666666"
+                           Margin="0,5,0,0"
+                           TextWrapping="Wrap"/>
+            </Grid>
+            
+            <Button x:Name="AboutButton"
+                    Grid.Column="1"
+                    Content="About"
+                    VerticalAlignment="Top"
+                    Margin="10,8,0,0"
+                    Width="80"
+                    Height="30"
+                    Background="Transparent"
+                    Foreground="#0078D4"
+                    BorderThickness="1"
+                    BorderBrush="#0078D4"
+                    FontSize="12"
+                    FontWeight="SemiBold"
+                    Click="AboutButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="4"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#E6F3FF"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#CCE4FF"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
 
         <!-- Status Indicator -->
         <Border Grid.Row="1"
                 Background="White"
                 CornerRadius="8"
                 Padding="20"
-                Margin="0,0,0,20">
+                Margin="0,0,0,30">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -65,12 +123,74 @@
             </Grid>
         </Border>
 
-        <!-- Start with Windows Toggle -->
+        <!-- Enable/Disable Toggle -->
         <Border Grid.Row="2"
                 Background="White"
                 CornerRadius="8"
                 Padding="20"
-                Margin="0,0,0,20">
+                Margin="0,0,0,30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Enable Desktop Switcher"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Foreground="#1A1A1A"/>
+                    <TextBlock Text="Turn the mouse wheel desktop switching on or off"
+                               FontSize="12"
+                               Foreground="#999999"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+
+                <ToggleButton x:Name="EnableSwitcherToggle"
+                              Grid.Column="1"
+                              Width="50"
+                              Height="26"
+                              Checked="EnableSwitcherToggle_Checked"
+                              Unchecked="EnableSwitcherToggle_Unchecked">
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="Border"
+                                                Background="#CCCCCC"
+                                                CornerRadius="13"
+                                                Width="50"
+                                                Height="26">
+                                            <Ellipse x:Name="Ellipse"
+                                                     Fill="White"
+                                                     Width="20"
+                                                     Height="20"
+                                                     HorizontalAlignment="Left"
+                                                     Margin="3,0,0,0"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#4CAF50"/>
+                                                <Setter TargetName="Ellipse" Property="HorizontalAlignment" Value="Right"/>
+                                                <Setter TargetName="Ellipse" Property="Margin" Value="0,0,3,0"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+            </Grid>
+        </Border>
+
+        <!-- Start with Windows Toggle -->
+        <Border Grid.Row="3"
+                Background="White"
+                CornerRadius="8"
+                Padding="20"
+                Margin="0,0,0,30">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -127,48 +247,6 @@
             </Grid>
         </Border>
 
-        <!-- About Button -->
-        <Border Grid.Row="3"
-                Background="White"
-                CornerRadius="8"
-                Padding="20">
-            <Button x:Name="AboutButton"
-                    Content="About"
-                    HorizontalAlignment="Stretch"
-                    Height="40"
-                    Background="#0078D4"
-                    Foreground="White"
-                    BorderThickness="0"
-                    FontSize="14"
-                    FontWeight="SemiBold"
-                    Click="AboutButton_Click">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-                                            CornerRadius="6"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            BorderBrush="{TemplateBinding BorderBrush}">
-                                        <ContentPresenter HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#106EBE"/>
-                                        </Trigger>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="Background" Value="#005A9E"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-        </Border>
 
     </Grid>
 </Window>
