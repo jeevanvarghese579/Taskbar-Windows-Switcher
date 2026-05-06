@@ -5,4 +5,6 @@ Taskbar Windows Switcher is a lightweight Windows utility that lets you switch v
 
 ## Screenshot
 
-![App Screenshot](screenshots/app.png)
+![Screenshot 1](screenshots/app.png)
+
+![Screenshot 2](screenshots/app - Copy.png)
