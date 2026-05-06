@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Jeevan Varghese")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.4.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.4+0b32c9ce62160a44810c5396f62bf0b61b23f521")]
 [assembly: System.Reflection.AssemblyProductAttribute("TaskbarDesktopSwitcher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskbarDesktopSwitcher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.4.0")]
