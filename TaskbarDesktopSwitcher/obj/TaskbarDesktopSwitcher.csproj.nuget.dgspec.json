@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj": {}
+    "d:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj": {}
   },
   "projects": {
-    "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj": {
-      "version": "110.0.0",
+    "d:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj": {
+      "version": "1.2.0",
       "restore": {
-        "projectUniqueName": "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
+        "projectUniqueName": "d:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
         "projectName": "TaskbarDesktopSwitcher",
-        "projectPath": "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
+        "projectPath": "d:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
         "packagesPath": "C:\\Users\\Jeevan\\.nuget\\packages\\",
-        "outputPath": "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\obj\\",
+        "outputPath": "d:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jeevan\\AppData\\Roaming\\NuGet\\NuGet.Config"

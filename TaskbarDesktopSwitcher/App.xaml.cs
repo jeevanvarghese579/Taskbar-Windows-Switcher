@@ -36,8 +36,11 @@ namespace TaskbarDesktopSwitcher
             // Pass notify icon manager reference to main window
             _mainWindow.NotifyIconManager = _notifyIconManager;
 
-            // Show the main window
-            _mainWindow.Show();
+            // Show the main window only if "Start Minimized" is not enabled
+            if (!_startupManager.IsStartMinimizedEnabled())
+            {
+                _mainWindow.Show();
+            }
         }
 
         private void OnWheelScrolled(object? sender, WheelEventArgs e)

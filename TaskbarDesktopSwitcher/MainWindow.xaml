@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:TaskbarDesktopSwitcher"
         mc:Ignorable="d"
         Title="Taskbar Desktop Switcher"
-        Height="650"
+        Height="750"
         Width="550"
-        MinHeight="650"
+        MinHeight="750"
         MinWidth="550"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow"
         Loaded="Window_Loaded">
     <Grid Margin="60">
@@ -20,7 +20,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- App Title and About Button -->
@@ -247,6 +247,67 @@
             </Grid>
         </Border>
 
+        <!-- Start Minimized to Tray Toggle -->
+        <Border Grid.Row="4"
+                Background="White"
+                CornerRadius="8"
+                Padding="20"
+                Margin="0,0,0,30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Start Minimized to Tray"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Foreground="#1A1A1A"/>
+                    <TextBlock Text="Application will start minimized to system tray"
+                               FontSize="12"
+                               Foreground="#999999"
+                               Margin="0,2,0,0"/>
+                </StackPanel>
+
+                <ToggleButton x:Name="StartMinimizedToggle"
+                              Grid.Column="1"
+                              Width="50"
+                              Height="26"
+                              Checked="StartMinimizedToggle_Checked"
+                              Unchecked="StartMinimizedToggle_Unchecked">
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="Border"
+                                                Background="#CCCCCC"
+                                                CornerRadius="13"
+                                                Width="50"
+                                                Height="26">
+                                            <Ellipse x:Name="Ellipse"
+                                                     Fill="White"
+                                                     Width="20"
+                                                     Height="20"
+                                                     HorizontalAlignment="Left"
+                                                     Margin="3,0,0,0"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#4CAF50"/>
+                                                <Setter TargetName="Ellipse" Property="HorizontalAlignment" Value="Right"/>
+                                                <Setter TargetName="Ellipse" Property="Margin" Value="0,0,3,0"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+            </Grid>
+        </Border>
 
     </Grid>
 </Window>

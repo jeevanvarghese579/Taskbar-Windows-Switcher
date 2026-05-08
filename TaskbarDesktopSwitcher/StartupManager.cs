@@ -91,5 +91,71 @@ namespace TaskbarDesktopSwitcher
                    System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName ?? 
                    string.Empty;
         }
+
+        /// <summary>
+        /// Checks if the app is configured to start minimized to tray.
+        /// </summary>
+        public bool IsStartMinimizedEnabled()
+        {
+            try
+            {
+                using (var key = Registry.CurrentUser.OpenSubKey(RunRegistryPath, false))
+                {
+                    if (key != null)
+                    {
+                        var value = key.GetValue(AppName + "_StartMinimized");
+                        return value != null && value.ToString() == "true";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Silently handle exceptions to prevent crashes
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Enables starting the app minimized to tray.
+        /// </summary>
+        public void EnableStartMinimized()
+        {
+            try
+            {
+                using (var key = Registry.CurrentUser.OpenSubKey(RunRegistryPath, true))
+                {
+                    if (key != null)
+                    {
+                        key.SetValue(AppName + "_StartMinimized", "true");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Silently handle exceptions to prevent crashes
+            }
+        }
+
+        /// <summary>
+        /// Disables starting the app minimized to tray.
+        /// </summary>
+        public void DisableStartMinimized()
+        {
+            try
+            {
+                using (var key = Registry.CurrentUser.OpenSubKey(RunRegistryPath, true))
+                {
+                    if (key != null)
+                    {
+                        key.DeleteValue(AppName + "_StartMinimized", false);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Silently handle exceptions to prevent crashes
+            }
+        }
     }
 }

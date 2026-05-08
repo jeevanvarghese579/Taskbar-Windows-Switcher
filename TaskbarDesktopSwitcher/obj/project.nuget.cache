@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/XFoW6PKeDY=",
+  "dgSpecHash": "pFfGx8dF5A0=",
   "success": true,
-  "projectFilePath": "D:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
+  "projectFilePath": "d:\\Veet projects\\MDS Backups\\MDS2\\TaskbarDesktopSwitcher\\TaskbarDesktopSwitcher.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jeevan\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.26\\microsoft.netcore.app.ref.8.0.26.nupkg.sha512",
     "C:\\Users\\Jeevan\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.26\\microsoft.windowsdesktop.app.ref.8.0.26.nupkg.sha512",

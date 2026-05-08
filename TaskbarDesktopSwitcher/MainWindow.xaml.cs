@@ -55,6 +55,7 @@ namespace TaskbarDesktopSwitcher
             if (StartupManager != null)
             {
                 StartWithWindowsToggle.IsChecked = StartupManager.IsStartWithWindowsEnabled();
+                StartMinimizedToggle.IsChecked = StartupManager.IsStartMinimizedEnabled();
             }
             
             // Initialize the enable switcher toggle
@@ -86,6 +87,16 @@ namespace TaskbarDesktopSwitcher
             MouseHook?.Stop();
             UpdateStatus(false);
             NotifyIconManager?.UpdateEnableSwitcherState(false);
+        }
+
+        private void StartMinimizedToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            StartupManager?.EnableStartMinimized();
+        }
+
+        private void StartMinimizedToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            StartupManager?.DisableStartMinimized();
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
