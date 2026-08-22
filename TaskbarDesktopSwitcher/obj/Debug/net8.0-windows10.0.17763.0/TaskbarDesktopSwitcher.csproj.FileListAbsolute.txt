@@ -55,3 +55,32 @@ d:\Veet projects\MDS Backups\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-window
 d:\Veet projects\MDS Backups\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.pdb
 d:\Veet projects\MDS Backups\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.genruntimeconfig.cache
 d:\Veet projects\MDS Backups\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\ref\TaskbarDesktopSwitcher.dll
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\Styles.baml
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\AboutWindow.g.cs
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\MainWindow.g.cs
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\App.g.cs
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher_MarkupCompile.cache
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher_MarkupCompile.lref
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.dll
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\refint\TaskbarDesktopSwitcher.dll
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.pdb
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\icon.ico
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.exe
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.deps.json
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.runtimeconfig.json
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.dll
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.pdb
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\Microsoft.Windows.SDK.NET.dll
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\bin\Debug\net8.0-windows10.0.17763.0\WinRT.Runtime.dll
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\App.baml
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\AboutWindow.baml
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\MainWindow.baml
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.g.resources
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.GeneratedMSBuildEditorConfig.editorconfig
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.AssemblyInfoInputs.cache
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.AssemblyInfo.cs
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.csproj.CoreCompileInputs.cache
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.sourcelink.json
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarD.6BE12D7E.Up2Date
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\TaskbarDesktopSwitcher.genruntimeconfig.cache
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\ref\TaskbarDesktopSwitcher.dll

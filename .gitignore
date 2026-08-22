@@ -1,0 +1,30 @@
+# Build output and publish artifacts
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+
+# Visual Studio / Rider / VS Code user state
+.vs/
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# NuGet restore and local packages
+*.nupkg
+*.snupkg
+packages/
+
+# Test, coverage, and log output
+TestResults/
+*.coverage
+*.coveragexml
+*.log
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store

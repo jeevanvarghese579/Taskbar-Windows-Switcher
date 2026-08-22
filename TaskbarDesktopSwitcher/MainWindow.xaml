@@ -6,16 +6,20 @@
         xmlns:local="clr-namespace:TaskbarDesktopSwitcher"
         mc:Ignorable="d"
         Title="Taskbar Desktop Switcher"
-        Height="750"
+        Height="720"
         Width="550"
-        MinHeight="750"
-        MinWidth="550"
+        MinHeight="500"
+        MinWidth="480"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStyle="SingleBorderWindow"
         Loaded="Window_Loaded">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
     <Grid Margin="60">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -42,7 +46,7 @@
                            Foreground="#1A1A1A"
                            TextWrapping="Wrap"/>
                 <TextBlock Grid.Row="1"
-                           Text="Switch virtual desktops with mouse wheel over taskbar"
+                           Text="Configure actions for the top and bottom screen edges"
                            FontSize="14"
                            Foreground="#666666"
                            Margin="0,5,0,0"
@@ -185,8 +189,55 @@
             </Grid>
         </Border>
 
+        <!-- Edge actions -->
+        <Border Grid.Row="3" Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,30">
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Top Edge" FontSize="16" FontWeight="SemiBold" Foreground="#1A1A1A"/>
+                    <TextBlock Text="Choose what the wheel does at the top of each monitor" FontSize="12" Foreground="#999999" Margin="0,2,0,0"/>
+                </StackPanel>
+                <ComboBox x:Name="TopEdgeComboBox" Grid.Column="1" VerticalAlignment="Center" SelectionChanged="EdgeComboBox_SelectionChanged">
+                    <ComboBoxItem Tag="None" Content="None"/>
+                    <ComboBoxItem Tag="VirtualDesktops" Content="Virtual Desktops"/>
+                    <ComboBoxItem Tag="WindowSwitching" Content="Window Switching"/>
+                </ComboBox>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="4" Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,30">
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Bottom Edge" FontSize="16" FontWeight="SemiBold" Foreground="#1A1A1A"/>
+                    <TextBlock Text="Choose what the wheel does at the bottom of each monitor" FontSize="12" Foreground="#999999" Margin="0,2,0,0"/>
+                </StackPanel>
+                <ComboBox x:Name="BottomEdgeComboBox" Grid.Column="1" VerticalAlignment="Center" SelectionChanged="EdgeComboBox_SelectionChanged">
+                    <ComboBoxItem Tag="None" Content="None"/>
+                    <ComboBoxItem Tag="VirtualDesktops" Content="Virtual Desktops"/>
+                    <ComboBoxItem Tag="WindowSwitching" Content="Window Switching"/>
+                </ComboBox>
+            </Grid>
+        </Border>
+
+        <!-- Window Switcher selection button -->
+        <Border Grid.Row="5" Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,30">
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="180"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Window Switcher Select Button" FontSize="16" FontWeight="SemiBold" Foreground="#1A1A1A"/>
+                    <TextBlock Text="Button used to activate the highlighted application" FontSize="12" Foreground="#999999" Margin="0,2,0,0"/>
+                </StackPanel>
+                <ComboBox x:Name="WindowSwitcherSelectButtonComboBox" Grid.Column="1" VerticalAlignment="Center" SelectionChanged="WindowSwitcherSelectButtonComboBox_SelectionChanged">
+                    <ComboBoxItem Tag="Left" Content="Left Mouse Button"/>
+                    <ComboBoxItem Tag="Right" Content="Right Mouse Button"/>
+                    <ComboBoxItem Tag="Middle" Content="Middle Mouse Button"/>
+                </ComboBox>
+            </Grid>
+        </Border>
+
         <!-- Start with Windows Toggle -->
-        <Border Grid.Row="3"
+        <Border Grid.Row="6"
                 Background="White"
                 CornerRadius="8"
                 Padding="20"
@@ -248,7 +299,7 @@
         </Border>
 
         <!-- Start Minimized to Tray Toggle -->
-        <Border Grid.Row="4"
+        <Border Grid.Row="7"
                 Background="White"
                 CornerRadius="8"
                 Padding="20"
@@ -310,4 +361,5 @@
         </Border>
 
     </Grid>
+    </ScrollViewer>
 </Window>

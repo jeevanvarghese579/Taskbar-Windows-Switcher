@@ -1,191 +1,124 @@
 using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace TaskbarDesktopSwitcher
 {
-    /// <summary>
-    /// Manages the system tray icon and its context menu.
-    /// Provides quick access to app functions from the tray.
-    /// Uses Windows Forms NotifyIcon for system tray functionality.
-    /// </summary>
-    public class NotifyIconManager : IDisposable
+    public sealed class NotifyIconManager : IDisposable
     {
         private readonly NotifyIcon _notifyIcon;
         private readonly MainWindow _mainWindow;
         private readonly StartupManager _startupManager;
+        private readonly EdgeSettings _edgeSettings;
         private ToolStripMenuItem? _startWithWindowsMenuItem;
         private ToolStripMenuItem? _enableSwitcherMenuItem;
+        private ToolStripMenuItem? _topEdgeMenuItem;
+        private ToolStripMenuItem? _bottomEdgeMenuItem;
 
-        public NotifyIconManager(MainWindow mainWindow, StartupManager startupManager)
+        public NotifyIconManager(MainWindow mainWindow, StartupManager startupManager, EdgeSettings edgeSettings)
         {
-            _mainWindow = mainWindow ?? throw new ArgumentNullException(nameof(mainWindow));
-            _startupManager = startupManager ?? throw new ArgumentNullException(nameof(startupManager));
-
-            // Initialize the notify icon with custom icon
-            var iconPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "icon.ico");
+            _mainWindow = mainWindow;
+            _startupManager = startupManager;
+            _edgeSettings = edgeSettings;
             _notifyIcon = new NotifyIcon
             {
-                Icon = System.IO.File.Exists(iconPath) ? new Icon(iconPath) : SystemIcons.Application,
+                Icon = AppIcon.LoadTrayIcon(),
                 Text = "Taskbar Desktop Switcher",
-                Visible = true
+                Visible = true,
+                ContextMenuStrip = CreateContextMenu()
             };
-
-            // Create context menu
-            _notifyIcon.ContextMenuStrip = CreateContextMenu();
-
-            // Handle left click to open window
-            _notifyIcon.MouseClick += (s, e) => 
-            {
-                if (e.Button == MouseButtons.Left)
-                {
-                    ShowMainWindow();
-                }
-            };
-            // Also handle double-click for convenience
-            _notifyIcon.DoubleClick += (s, e) => ShowMainWindow();
+            _notifyIcon.MouseClick += (_, e) => { if (e.Button == MouseButtons.Left) ShowMainWindow(); };
+            _notifyIcon.DoubleClick += (_, _) => ShowMainWindow();
         }
 
-        /// <summary>
-        /// Creates the context menu for the tray icon.
-        /// </summary>
         private ContextMenuStrip CreateContextMenu()
         {
             var menu = new ContextMenuStrip();
-
-            // Open menu item
             var openItem = new ToolStripMenuItem("Open");
-            openItem.Click += (s, e) => ShowMainWindow();
+            openItem.Click += (_, _) => ShowMainWindow();
             menu.Items.Add(openItem);
 
-            // Enable/Disable Desktop Switcher menu item
-            _enableSwitcherMenuItem = new ToolStripMenuItem("Enable Desktop Switcher");
-            _enableSwitcherMenuItem.Checked = _mainWindow.IsSwitcherEnabled;
-            _enableSwitcherMenuItem.Click += (s, e) =>
-            {
-                if (_enableSwitcherMenuItem != null && _mainWindow != null)
-                {
-                    // When Click fires, Checked has already been toggled by ToolStripMenuItem
-                    bool isEnabled = _enableSwitcherMenuItem.Checked;
-                    
-                    // Update main window toggle
-                    _mainWindow.EnableSwitcherToggle.IsChecked = isEnabled;
-                    
-                    // Directly control the MouseHook
-                    if (isEnabled)
-                    {
-                        _mainWindow.MouseHook?.Start();
-                        _mainWindow.UpdateStatus(true);
-                    }
-                    else
-                    {
-                        _mainWindow.MouseHook?.Stop();
-                        _mainWindow.UpdateStatus(false);
-                    }
-                    
-                    _mainWindow.IsSwitcherEnabled = isEnabled;
-                }
-            };
+            _enableSwitcherMenuItem = new ToolStripMenuItem("Enable Desktop Switcher") { CheckOnClick = true };
+            _enableSwitcherMenuItem.Click += (_, _) => _mainWindow.EnableSwitcherToggle.IsChecked = _enableSwitcherMenuItem.Checked;
             menu.Items.Add(_enableSwitcherMenuItem);
 
-            // Start with Windows toggle menu item
-            _startWithWindowsMenuItem = new ToolStripMenuItem("Start with Windows");
-            _startWithWindowsMenuItem.Checked = _startupManager.IsStartWithWindowsEnabled();
-            _startWithWindowsMenuItem.Click += (s, e) =>
-            {
-                if (_startWithWindowsMenuItem != null)
-                {
-                    // When Click fires, Checked has already been toggled by ToolStripMenuItem
-                    // If now checked = user just checked it -> enable startup
-                    // If now unchecked = user just unchecked it -> disable startup
-                    if (_startWithWindowsMenuItem.Checked)
-                    {
-                        // User just checked it - enable startup
-                        _startupManager.EnableStartWithWindows();
-                    }
-                    else
-                    {
-                        // User just unchecked it - disable startup
-                        _startupManager.DisableStartWithWindows();
-                    }
+            _topEdgeMenuItem = CreateEdgeMenu("Top Edge", EdgePosition.Top);
+            _bottomEdgeMenuItem = CreateEdgeMenu("Bottom Edge", EdgePosition.Bottom);
+            menu.Items.Add(_topEdgeMenuItem);
+            menu.Items.Add(_bottomEdgeMenuItem);
 
-                    // Sync the toggle in main window
-                    if (_mainWindow.StartupManager != null)
-                    {
-                        _mainWindow.StartWithWindowsToggle.IsChecked = _startWithWindowsMenuItem.Checked;
-                    }
-                }
+            _startWithWindowsMenuItem = new ToolStripMenuItem("Start with Windows") { CheckOnClick = true };
+            _startWithWindowsMenuItem.Click += (_, _) =>
+            {
+                if (_startWithWindowsMenuItem.Checked) _startupManager.EnableStartWithWindows();
+                else _startupManager.DisableStartWithWindows();
+                _mainWindow.StartWithWindowsToggle.IsChecked = _startWithWindowsMenuItem.Checked;
             };
             menu.Items.Add(_startWithWindowsMenuItem);
-
-            // Separator
             menu.Items.Add(new ToolStripSeparator());
 
-            // About menu item
             var aboutItem = new ToolStripMenuItem("About");
-            aboutItem.Click += (s, e) =>
-            {
-                var aboutWindow = new AboutWindow();
-                aboutWindow.Owner = _mainWindow;
-                aboutWindow.ShowDialog();
-            };
+            aboutItem.Click += (_, _) => { var about = new AboutWindow { Owner = _mainWindow }; about.ShowDialog(); };
             menu.Items.Add(aboutItem);
-
-            // Separator
             menu.Items.Add(new ToolStripSeparator());
-
-            // Exit menu item
             var exitItem = new ToolStripMenuItem("Exit");
-            exitItem.Click += (s, e) =>
-            {
-                var app = System.Windows.Application.Current as App;
-                app?.ExitApplication();
-            };
+            exitItem.Click += (_, _) => (System.Windows.Application.Current as App)?.ExitApplication();
             menu.Items.Add(exitItem);
-
+            UpdateStates();
             return menu;
         }
 
-        /// <summary>
-        /// Shows the main window and brings it to front.
-        /// </summary>
+        private ToolStripMenuItem CreateEdgeMenu(string text, EdgePosition edge)
+        {
+            var parent = new ToolStripMenuItem(text);
+            foreach (var function in Enum.GetValues<EdgeFunction>())
+            {
+                var item = new ToolStripMenuItem(GetEdgeText(function)) { Tag = function, CheckOnClick = true };
+                item.Click += (_, _) => _mainWindow.SetEdgeFunction(edge, function);
+                parent.DropDownItems.Add(item);
+            }
+            return parent;
+        }
+
+        public void UpdateStates()
+        {
+            if (_enableSwitcherMenuItem != null) _enableSwitcherMenuItem.Checked = _mainWindow.IsSwitcherEnabled;
+            if (_startWithWindowsMenuItem != null) _startWithWindowsMenuItem.Checked = _startupManager.IsStartWithWindowsEnabled();
+            UpdateEdgeStates();
+        }
+
+        public void UpdateEdgeStates()
+        {
+            UpdateEdgeMenu(_topEdgeMenuItem, _edgeSettings.TopEdge);
+            UpdateEdgeMenu(_bottomEdgeMenuItem, _edgeSettings.BottomEdge);
+        }
+
+        private static void UpdateEdgeMenu(ToolStripMenuItem? menu, EdgeFunction selected)
+        {
+            if (menu == null) return;
+            foreach (ToolStripMenuItem item in menu.DropDownItems)
+                item.Checked = item.Tag is EdgeFunction function && function == selected;
+        }
+
+        private static string GetEdgeText(EdgeFunction function) => function switch
+        {
+            EdgeFunction.VirtualDesktops => "Virtual Desktops",
+            EdgeFunction.WindowSwitching => "Window Switching",
+            _ => "None"
+        };
+
+        public void UpdateStartWithWindowsState() => UpdateStates();
+        public void UpdateEnableSwitcherState(bool isEnabled) => UpdateStates();
+
         private void ShowMainWindow()
         {
-            if (_mainWindow != null)
-            {
-                _mainWindow.Show();
-                _mainWindow.WindowState = WindowState.Normal;
-                _mainWindow.Activate();
-                _mainWindow.Focus();
-            }
+            _mainWindow.Show();
+            _mainWindow.WindowState = WindowState.Normal;
+            _mainWindow.Activate();
+            _mainWindow.Focus();
         }
 
-        /// <summary>
-        /// Updates the Start with Windows check state in the context menu.
-        /// </summary>
-        public void UpdateStartWithWindowsState()
-        {
-            if (_startWithWindowsMenuItem != null)
-            {
-                _startWithWindowsMenuItem.Checked = _startupManager.IsStartWithWindowsEnabled();
-            }
-        }
-
-        /// <summary>
-        /// Updates the Enable Desktop Switcher check state in the context menu.
-        /// </summary>
-        public void UpdateEnableSwitcherState(bool isEnabled)
-        {
-            if (_enableSwitcherMenuItem != null)
-            {
-                _enableSwitcherMenuItem.Checked = isEnabled;
-            }
-        }
-
-        public void Dispose()
-        {
-            _notifyIcon?.Dispose();
-        }
+        public void Dispose() => _notifyIcon.Dispose();
     }
 }

@@ -1,20 +1,20 @@
 ﻿TaskbarDesktopSwitcher
-1.2.0.0
+
 
 winexe
 C#
 .cs
-D:\Veet projects\MDS Backups\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\obj\Debug\net8.0-windows10.0.17763.0\
 TaskbarDesktopSwitcher
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS10_0_17763_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS10_0_17763_0_OR_GREATER;WINDOWS8_0_OR_GREATER;WINDOWS7_0_OR_GREATER
-D:\Veet projects\MDS Backups\MDS2\TaskbarDesktopSwitcher\App.xaml
+D:\VSC Softwares\Taskbar Desktop Switcher V2\MDS2\TaskbarDesktopSwitcher\App.xaml
 32003691803
 
-111572574680
-209688248995
+12-1330358028
+20973232242
 AboutWindow.xaml;MainWindow.xaml;Styles.xaml;
 
-True
+False
 
